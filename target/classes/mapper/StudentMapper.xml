@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songci.dao.StudentDao">
+    <select id="queryStudent" resultType="com.songci.entity.Student">
+        SELECT  * FROM t_student ORDER BY role_id ASC 
+    </select>
+    <select id="queryStudentById" resultType="com.songci.entity.Student">
+        SELECT  * FROM t_student WHERE id=#{id}
+    </select>
+    <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.songci.entity.Student">
+        INSERT INTO t_student (name,role_id)
+        VALUES(#{name},#{roleId})
+    </insert>
+    <update id="updateStudent" parameterType="com.songci.entity.Student">
+        UPDATE t_student
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="roleId!=null">role_id=#{roleId},</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteStudent">
+        DELETE FROM
+        t_student
+        WHERE
+        id=#{id}
+    </delete>
+</mapper>
